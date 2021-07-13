@@ -17,22 +17,12 @@ public class HexCalc implements Operations{
 	  this.str2=str2;
   }
   
-  public static void main(String []args)
-  {
-	  String str1="5";
-	  String str2="1";
-	  
-	  HexCalc cal = new HexCalc(str1,str2);
-	  System.out.println(cal.add());
-	  System.out.println(cal.subtract());
-	  System.out.println(cal.multiply());
-	  System.out.println(cal.divide());
-	  System.out.println(cal.isEqual());
-	  System.out.println(cal.isGreater());
-	  System.out.println(cal.isLesser());
-  }
+/*
+ * this method adds two hexadecimal number
+ * @return hexadecimal string of addition of the numbers  
+ */
   
-  public String add()                                 //this method adds string1 and string2
+  public String add()                                 
   {
 	  int num1=hex_to_dec(str1);
 	  int num2=hex_to_dec(str2);
@@ -42,7 +32,11 @@ public class HexCalc implements Operations{
 	  return s;
   }
   
-  public String subtract()                                 //this method subtracts string 2 from string 1
+  /*
+   * @this method subtracts string2 from string 1 
+   * @return the hexadecimal string obtained after subtraction
+   */
+  public String subtract()                                 
   {
 	  int num1=hex_to_dec(str1);
 	  int num2=hex_to_dec(str2);
@@ -53,7 +47,11 @@ public class HexCalc implements Operations{
 	  return s;
   } 
   
-  public String multiply()                                  //this method multiply string 1 by string2
+  /*
+   * this method multiplies two hexadecimal numbers
+   * @return the hexadecimal string after multiplication	  
+   */
+  public String multiply()                                  
   {
 	  int num1=hex_to_dec(str1);
 	  int num2=hex_to_dec(str2);
@@ -63,7 +61,11 @@ public class HexCalc implements Operations{
 	  return s;
   }
   
-  public String divide()                                     //this method divides string1 by string2
+  /*
+   * this divides one hexadecimal string by another string
+   * @return the quotient in the hexadecimal string form
+   */
+  public String divide()                                    
   {
 	  int num1=hex_to_dec(str1);
 	  int num2=hex_to_dec(str2);
@@ -74,9 +76,12 @@ public class HexCalc implements Operations{
 	  return s;
   }
   
-  
-  
-  public  int hex_to_dec(String str)                          //this method converts hexadecimal to decimal
+  /*
+   * this method converts hexadecimal string into decimal number
+   * @param hexadecimal string 
+   * @return decimal form of hexadecimal number
+   */
+  public  int hex_to_dec(String str)                         
   {
 	  
 	  int num=0,count=1,hex_base=16;
@@ -84,29 +89,56 @@ public class HexCalc implements Operations{
 	  {
          char c=str.charAt(i);
          int dig=ch_to_num(c);
-        // System.out.println(dig);
          num+=count*dig;
          
          count=count*hex_base;
 	  }
+	 // System.out.println(num);
 	  return num;
   }
   
   
+  /*
+   * this methods converts hexadecimal character to digit
+   * @return digit 
+   */
   public  int ch_to_num(char c)                             //this method converts character to number
   { 
-	  int dig;
-	  if(c>=65 && c<=70)
-		  dig=c-'A';
-	  else	  
-		  dig =c-'0';  
-	  return dig;
+	  int dig;  
+	 switch(c)
+	 {
+	    case 'A' : dig=10;
+	               break;
+	               
+	    case 'B' : dig=11;
+                   break;
+                   
+	    case 'C' : dig=12;
+                   break;
+                   
+	    case 'D' : dig=13;
+                   break;
+                   
+	    case 'E' : dig=14;
+                   break;
+                   
+	    case 'F' : dig=15;
+                   break;           
+	 
+	    default:   dig =c-'0';  
+	 }
+	 return dig;
   }
   
-  public String dec_to_hex(int num)                 //this method converts decimal to hexadecimal
+  /*
+   * this method converts decimal number to hexadecimal form 
+   * @param decimal number
+   * @return hexadecimal form of the decimal number
+   */
+  public String dec_to_hex(int num)                 
   {
 	  int rem,hex_base=16;  
-	     String hex="";   
+	      String hex="";   
 	     char hexchars[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};  
 	    while(num>0)  
 	     {  
@@ -114,10 +146,15 @@ public class HexCalc implements Operations{
 	       hex=hexchars[rem]+hex;   
 	       num=num/hex_base;  
 	     }  
+	   // System.out.println(hex);
 	    return hex; 
   }
-
-  public boolean isEqual()                            //this method checks for equality of string
+  
+ /*
+  * this method checks whether string str1 is equal to string str2
+  * @return true if equal else return false
+  */
+  public boolean isEqual()                           
   {
 	  if(str1.equals(str2))
 	   return true;
@@ -125,7 +162,11 @@ public class HexCalc implements Operations{
 	   return false;
   }
     
-  public boolean isGreater()                          //this method checks if string 1 is greater than string 2
+  /*
+   * this method checks whether string str1 is greater than string str2
+   * @return true if str1 is greater than str2 else return false
+   */
+  public boolean isGreater()                          
   {
 	  boolean result=true;
 	  int count=0;
@@ -153,7 +194,11 @@ public class HexCalc implements Operations{
 	return result;
   }
   
-  public boolean isLesser()                        // this method checks if string 1 is smaller than string 2
+  /*
+   * this method checks whether string str1 is lesser than string str2 
+   * @return true if str1 is lesser than str2 else return false
+   */
+  public boolean isLesser()                       
   {
 	  boolean result=true;
 	  int count=0;
@@ -169,14 +214,14 @@ public class HexCalc implements Operations{
 		 {
 			 for(int i=0;i<str1.length();i++)
 			 {
-				 if(str1.charAt(i)<str2.charAt(i))
-					 return true;
+				 if(str1.charAt(i)>str2.charAt(i))
+					 return false;
 				 else
 					 count++;
 			 }
 			 
 			 if(count==str1.length())
-				 result=false;
+				 result=true;
 		 }
 	 return result;
   }
